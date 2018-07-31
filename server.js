@@ -12,8 +12,7 @@ var ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 // app is running!
 app.get('/', function(req, res) {
-    res.send('na sola da bota! '+ new Date());
-    res.send('na palma da mão! '+ new Date());
+    res.send('opa gente! '+ new Date());
 });
 
 
