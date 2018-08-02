@@ -1,9 +1,8 @@
 var express = require('express'),
+    fs = require('fs'),
     app = module.exports = express.createServer(express.logger()),
     io = require('socket.io').listen(app),
     routes = require('./routes');
-
-// Configuration
 
 app.configure(function() {
   app.set('views', __dirname + '/views');
@@ -27,9 +26,6 @@ io.configure(function () {
   io.set("polling duration", 10); 
 });
 
-// Routes
-
-
 // Use the port that Heroku provides or default to 5000
 var port = process.env.OPENSHIFT_NODEJS_PORT || 5000;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
@@ -39,3 +35,6 @@ app.listen(port, function() {
 });
 
 app.get('/', routes.index);
+
+
+module.exports = app;
