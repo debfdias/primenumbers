@@ -39,11 +39,11 @@ app.listen(port, function() {
   console.log("Express server listening on port %d", app.address().port);
 });
 
-//app.get('/', routes.index);
+app.get('/', routes.index);
 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
     res.send('quem disse berenice! '+ new Date());
-});
+});*/
 
 var counter = new Counter();
 counter.on('tick:counter', function(value) {
@@ -54,7 +54,7 @@ counter.on('reset:counter', function(value) {
   io.sockets.emit('value', { value: value });
 });
 
-//stopwatch.start();
+//counter.start();
 
 io.sockets.on('connection', function (socket) {
   io.sockets.emit('value', { value: counter.getTime() });
