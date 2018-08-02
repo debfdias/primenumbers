@@ -40,30 +40,3 @@ app.listen(port, function() {
 });
 
 app.get('/', routes.index);
-
-var counter = new Counter();
-counter.on('tick:counter', function(value) {
-  io.sockets.emit('value', { value: value });
-});
-
-counter.on('reset:counter', function(value) {
-  io.sockets.emit('value', { value: value });
-});
-
-//stopwatch.start();
-
-io.sockets.on('connection', function (socket) {
-  io.sockets.emit('value', { value: counter.getTime() });
-
-  socket.on('click:start', function () {
-    counter.start();
-  });
-  
-  socket.on('click:stop', function () {
-    counter.stop();
-  });
-
-  socket.on('click:reset', function () {
-    counter.reset();
-  });
-});
