@@ -39,7 +39,11 @@ app.listen(port, function() {
   console.log("Express server listening on port %d", app.address().port);
 });
 
-app.get('/', routes.index);
+//app.get('/', routes.index);
+
+app.get('/', function(req, res) {
+    res.send('quem disse berenice! '+ new Date());
+});
 
 var counter = new Counter();
 counter.on('tick:counter', function(value) {
