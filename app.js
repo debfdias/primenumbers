@@ -41,10 +41,6 @@ app.listen(port, function() {
 
 app.get('/', routes.index);
 
-/*app.get('/', function(req, res) {
-    res.send('quem disse berenice! '+ new Date());
-});*/
-
 var counter = new Counter();
 counter.on('tick:counter', function(value) {
   io.sockets.emit('value', { value: value });
@@ -54,10 +50,10 @@ counter.on('reset:counter', function(value) {
   io.sockets.emit('value', { value: value });
 });
 
-//counter.start();
+//stopwatch.start();
 
 io.sockets.on('connection', function (socket) {
-  io.sockets.emit('value', { value: counter.getTime() });
+  io.sockets.emit('value', { value: counter.getValue() });
 
   socket.on('click:start', function () {
     counter.start();

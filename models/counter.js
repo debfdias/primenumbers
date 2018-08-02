@@ -11,7 +11,7 @@ function Counter() {
     }
 
     this.second = 1000;  //intervalo entre contagem - sera maior se os numeros primos forem longes um do outro
-    this.time = 0;
+    this.value = 0;
     this.interval = undefined;
 
     events.EventEmitter.call(this);
@@ -43,25 +43,25 @@ Counter.prototype.stop = function() {
 
 Counter.prototype.reset = function() {
     console.log('Resetting!');
-    this.time = 0;
-    this.emit('reset:counter', this.formatTime(this.time));
+    this.value = 0;
+    this.emit('reset:counter', this.formatValue(this.value));
 };
 
 Counter.prototype.onTick = function() {
 
     for(var i=1;i<2;i++)
     {
-        this.time += this.second + i;
+        this.value += this.second + i;
 
-        var temp = parseInt(this.time / this.second, 10);
+        var temp = parseInt(this.value / this.second, 10);
 
         if(isPrime(temp) && temp!= 1)
         {
-            var formattedTime = this.formatTime(this.time);
-            this.emit('tick:counter', formattedTime);
+            var formattedValue = this.formatValue(this.value);
+            this.emit('tick:counter', formattedValue);
         }
 
-        if (this.time === 0) {
+        if (this.value === 0) {
             this.stop();
         }
     }
@@ -69,8 +69,8 @@ Counter.prototype.onTick = function() {
     
 };
 
-Counter.prototype.formatTime = function(time) {
-    var remainder = time,
+Counter.prototype.formatValue = function(value) {
+    var remainder = value,
         numSeconds,
         output = "";
 
@@ -83,8 +83,8 @@ Counter.prototype.formatTime = function(time) {
     return output;
 };
 
-Counter.prototype.getTime = function() {
-    return this.formatTime(this.time);
+Counter.prototype.getValue = function() {
+    return this.formatValue(this.value);
 };
 
 module.exports = Counter;
