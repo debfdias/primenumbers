@@ -1,2 +1,2 @@
 # primenumbers
-Test for Fatura Simples.
+Simple real time app using node js and sockets...
