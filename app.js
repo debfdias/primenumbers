@@ -1,8 +1,10 @@
 var express = require('express'),
-    fs = require('fs'),
     app = module.exports = express.createServer(express.logger()),
-    io = require('socket.io').listen(app),
+    io = require('socket.io').listen(app);
+    Counter = require('./models/counter'),
     routes = require('./routes');
+
+// Configuration
 
 app.configure(function() {
   app.set('views', __dirname + '/views');
@@ -26,6 +28,9 @@ io.configure(function () {
   io.set("polling duration", 10); 
 });
 
+// Routes
+
+
 // Use the port that Heroku provides or default to 5000
 var port = process.env.OPENSHIFT_NODEJS_PORT || 5000;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
@@ -36,5 +41,29 @@ app.listen(port, function() {
 
 app.get('/', routes.index);
 
+var counter = new Counter();
+counter.on('tick:counter', function(value) {
+  io.sockets.emit('value', { value: value });
+});
 
-module.exports = app;
+counter.on('reset:counter', function(value) {
+  io.sockets.emit('value', { value: value });
+});
+
+//stopwatch.start();
+
+io.sockets.on('connection', function (socket) {
+  io.sockets.emit('value', { value: counter.getTime() });
+
+  socket.on('click:start', function () {
+    counter.start();
+  });
+  
+  socket.on('click:stop', function () {
+    counter.stop();
+  });
+
+  socket.on('click:reset', function () {
+    counter.reset();
+  });
+});
