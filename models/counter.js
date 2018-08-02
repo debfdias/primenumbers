@@ -49,22 +49,16 @@ Counter.prototype.reset = function() {
 
 Counter.prototype.onTick = function() {
 
-    for(var i=1;i<2;i++)
-    {
-        this.time += this.second + i;
+        this.time += this.second ;
 
-        var temp = parseInt(this.time / this.second, 10);
-
-        if(isPrime(temp) && temp!= 1)
-        {
             var formattedTime = this.formatTime(this.time);
             this.emit('tick:counter', formattedTime);
-        }
+        
 
         if (this.time === 0) {
             this.stop();
         }
-    }
+    
     
     
 };
