@@ -1,15 +1,15 @@
 #wrapper {
-  width: 475px;
-  height: 171px;
-  margin: 100px auto;
+  width: 700px;
+  height: 51px;
+  margin: 30px auto;
 }
 
 #count {
-  font-family: 'Black Ops One', cursive;
-  font-size: 90px;
+  font-family: 'Helvetica', cursive;
+  font-size: 25px;
 }
 
-#info {
+.info {
   font-family: 'Helvetica', cursive;
   font-size: 15px;
 }

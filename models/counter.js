@@ -51,7 +51,7 @@ Counter.prototype.onTick = function() {
 
     for(var i=1;i<2;i++)
     {
-        this.value += this.second + i;
+        this.value += this.second + primeNumberList[i];
 
         var temp = parseInt(this.value / this.second, 10);
 

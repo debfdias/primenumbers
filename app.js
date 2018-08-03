@@ -2,6 +2,8 @@ var express = require('express'),
     app = module.exports = express.createServer(express.logger()),
     io = require('socket.io').listen(app);
     Counter = require('./models/counter'),
+    favicon = require('serve-favicon'),
+    path = require('path'),
     routes = require('./routes');
 
 // Configuration
@@ -13,6 +15,7 @@ app.configure(function() {
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.use(favicon(path.join(__dirname, '/public/assets/ico', 'favicon.png')))
 });
 
 app.configure('development', function() {
