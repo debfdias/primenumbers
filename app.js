@@ -36,7 +36,7 @@ io.configure(function () {
 
 // Use the port that Heroku provides or default to 5000
 var port = process.env.PORT || 5000;
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var server_ip_address = process.env.IP || '127.0.0.1';
 
 app.listen(port, function() {
   console.log("Express server listening on port %d", app.address().port);
